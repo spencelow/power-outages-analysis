@@ -1,5 +1,5 @@
 # Predicting Power Outage Duration in the U.S.
-*Author: Robert Lowery – spencelowery@umich.edu*
+*Author: Spence Lowery – lospence@umich.edu*
 
 ## Introduction
 
