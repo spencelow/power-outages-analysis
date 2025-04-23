@@ -3,13 +3,13 @@
 
 ## Introduction
 
-This project investigates the characteristics and predictors of major power outages in the United States from 2000 to 2016. We focus specifically on forecasting how long a power outage will last, using factors such as the number of customers affected, weather anomalies, and the root cause of the outage. Understanding these patterns can help utilities allocate restoration resources more effectively and improve infrastructure resilience.
+This project investigates the characteristics and predictors of major power outages in the United States from 2000 to 2016. I focus specifically on forecasting how long a power outage will last, using factors such as the number of customers affected, weather anomalies, and the root cause of the outage. Understanding these patterns can help utilities allocate restoration resources more effectively and improve infrastructure resilience.
 
 My central question is:
 
 **Can we predict the duration of a power outage, using only information available at the time the outage begins?**
 
-We use data provided in the Power Outages dataset, which contains 1534 outages across all 50 states. Key features include:
+I use data provided in the Power Outages dataset, which contains 1534 outages across all 50 states. Key features include:
 
 | Column Name             | Description |
 |-------------------------|-------------|
@@ -32,7 +32,7 @@ To prepare the dataset for analysis:
 ### Distribution of Outage Duration
 <iframe src="assets/duration_hist.html" width="800" height="600" frameborder="0"></iframe>
 
-The raw outage duration distribution is highly skewed. Most outages last under 100 hours, but some extreme events last over 3000 hours. We apply a log transformation for modeling.
+The raw outage duration distribution is highly skewed. Most outages last under 100 hours, but some extreme events last over 3000 hours. I apply a log transformation for modeling.
 
 ### Duration vs Cause Category
 <iframe src="assets/cause_vs_duration.html" width="800" height="600" frameborder="0"></iframe>
@@ -48,7 +48,7 @@ There is no strong correlation between how many people are affected and how long
 
 ## Framing a Prediction Problem
 
-We aim to predict the **duration** of a power outage, in hours, using features available at the start of the outage. Since duration is a continuous variable, this is a **regression** problem.
+I aim to predict the **duration** of a power outage, in hours, using features available at the start of the outage. Since duration is a continuous variable, this is a **regression** problem.
 
 - **Target (y):** `log(1 + OUTAGE.DURATION.HOURS)`
 - **Features (X):**
@@ -60,7 +60,7 @@ We aim to predict the **duration** of a power outage, in hours, using features a
 
 ## Baseline Model
 
-We built a baseline model using a simple **linear regression** pipeline with:
+I built a baseline model using a simple **linear regression** pipeline with:
 - StandardScaler on numerical features
 - OneHotEncoder on categorical features
 
@@ -77,12 +77,12 @@ This corresponds to an average prediction error of ~2.4 hours on the original sc
 
 ## Final Model
 
-We engineered 3 new features:
+I engineered 3 new features:
 - `TOTAL.ESTIMATED.CUSTOMERS`: sum of RES, COM, and IND customers
 - `PCT_CUSTOMERS_AFFECTED`: ratio of affected customers to total
 - `AFFECTED_X_ANOMALY`: interaction between anomaly level and customer impact
 
-We used a `RandomForestRegressor` with a tuned pipeline:
+I used a `RandomForestRegressor` with a tuned pipeline:
 
 **Best Parameters (via GridSearchCV):**
 - `n_estimators`: 200
